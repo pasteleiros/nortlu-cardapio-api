@@ -9,5 +9,12 @@ datasources:
     password: 'unisenha'
     schema-generate: CREATE_DROP
     dialect: POSTGRES
-jpa.default.properties.hibernate.hbm2ddl.auto: update
+jpa:
+  default:
+#    properties:
+#      hibernate:
+#        hbm2ddl:
+#          auto: update
+    packages-to-scan:
+      - 'io.github.pasteleiros.nortlulib.entity'
 redis.uri: redis://10.5.0.2
