@@ -17,4 +17,11 @@ class EnderecoService(val enderecoRepo: EnderecoRepo) {
     fun salvar(enderecoDto: EnderecoDto): EnderecoDto = enderecoRepo.save(enderecoDto.toEntity()).toDto();
 
     fun buscarEnderecoPorId(id: Long): EnderecoDto = enderecoRepo.findById(id).orElseThrow { NaoEncontradoException("Endereço não encontrado") }.toDto()
+    fun deletarEndereco(idEndereco: Long) {
+        this.buscarEnderecoPorId(idEndereco).let {
+            enderecoRepo.deleteById(idEndereco)
+        }
+
+    }
+
 }

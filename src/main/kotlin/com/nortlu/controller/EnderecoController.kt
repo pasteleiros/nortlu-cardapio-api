@@ -16,4 +16,10 @@ class EnderecoController ( val enderecoService: EnderecoService) {
     @Get("/{id}")
     fun buscarEndereco(@PathVariable("id") idEndereco : Long): HttpResponse<EnderecoDto> =
             HttpResponse.ok(enderecoService.buscarEnderecoPorId(idEndereco))
+
+    @Delete("/{id}")
+    fun deletarEndereco(@PathVariable("id") idEndereco : Long): HttpResponse<EnderecoDto> = enderecoService.deletarEndereco(idEndereco).let {
+        HttpResponse.ok()
+    }
+
 }
