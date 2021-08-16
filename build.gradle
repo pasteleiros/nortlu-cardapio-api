@@ -43,7 +43,7 @@ dependencies {
     testImplementation("org.testcontainers:postgresql")
     testImplementation("org.testcontainers:testcontainers")
     implementation("io.micronaut:micronaut-validation")
-    implementation 'io.github.pasteleiros:lib:1.0-SNAPSHOT'
+    implementation 'io.github.pasteleiros:lib:1.1-SNAPSHOT'
     implementation("io.micronaut.redis:micronaut-redis-lettuce")
     implementation("io.micronaut.configuration:micronaut-hibernate-validator:1.2.0")
 
