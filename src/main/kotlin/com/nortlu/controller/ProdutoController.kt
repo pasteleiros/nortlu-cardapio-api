@@ -5,7 +5,7 @@ import io.github.pasteleiros.nortlulib.dto.ProdutoDto
 import io.micronaut.http.HttpResponse
 import io.micronaut.http.annotation.*
 
-@Controller("/produto")
+@Controller("/produtos")
 class ProdutoController(val produtoService : ProdutoService) {
 
     @Post

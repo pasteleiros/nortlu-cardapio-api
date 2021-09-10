@@ -7,7 +7,7 @@ import io.micronaut.http.MediaType
 import io.micronaut.http.annotation.*
 import javax.inject.Inject
 
-@Controller("/categoria")
+@Controller("/categorias")
 class CategoriaController (val categoriaService : CategoriaService){
 //class CategoriaController (){
 

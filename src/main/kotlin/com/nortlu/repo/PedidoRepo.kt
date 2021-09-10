@@ -1,8 +1,6 @@
 package com.nortlu.repo
 
-import io.github.pasteleiros.nortlulib.entity.CategoriaEntity
 import io.github.pasteleiros.nortlulib.entity.PedidoEntity
-import io.github.pasteleiros.nortlulib.enum.StatusPedido
 import io.micronaut.data.annotation.Query
 import io.micronaut.data.annotation.Repository
 import io.micronaut.data.repository.CrudRepository

@@ -13,7 +13,7 @@ class ProdutoService (val produtoRepo: ProdutoRepo){
 
     fun salvar(produtoDto: ProdutoDto): ProdutoDto = produtoRepo.save(produtoDto.toEntity()).toDto();
 
-    fun buscarProdutoPorId(id: Long) = produtoRepo.findById(id).orElseThrow { NaoEncontradoException("Endereço não encontrado") }.toDto();
+    fun buscarProdutoPorId(id: Long) = produtoRepo.findById(id).orElseThrow { NaoEncontradoException("Produto não encontrado") }.toDto();
 
     fun deletarProduto(idProduto: Long) {
         this.buscarProdutoPorId(idProduto).let { produtoRepo.deleteById(idProduto) }
