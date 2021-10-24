@@ -1,7 +1,9 @@
 package com.nortlu.controller
 
 import com.nortlu.service.ProdutoService
+import io.github.pasteleiros.nortlulib.dto.PedidoDto
 import io.github.pasteleiros.nortlulib.dto.ProdutoDto
+import io.github.pasteleiros.nortlulib.enum.StatusPedido
 import io.micronaut.http.HttpResponse
 import io.micronaut.http.annotation.*
 
@@ -9,15 +11,21 @@ import io.micronaut.http.annotation.*
 class ProdutoController(val produtoService : ProdutoService) {
 
     @Post
-    fun salvarProduto(@Body produtoDto : ProdutoDto):HttpResponse<ProdutoDto> =
+    fun salvar(@Body produtoDto : ProdutoDto):HttpResponse<ProdutoDto> =
         HttpResponse.created(produtoService.salvar(produtoDto))
 
     @Get("/{id}")
     fun buscarEndereco(@PathVariable("id") idProduto : Long): HttpResponse<ProdutoDto> =
-        HttpResponse.ok(produtoService.buscarProdutoPorId(idProduto))
+        HttpResponse.ok(produtoService.buscarPorId(idProduto))
+
+    @Get("/listar")
+    fun listarPorStatus(@QueryValue("ativo")  status : Boolean): HttpResponse<List<ProdutoDto>> {
+        return  HttpResponse.ok(produtoService.listarPorStatus(status))
+    }
+
 
     @Delete("/{id}")
-    fun deletarEndereco(@PathVariable("id") idProduto : Long): HttpResponse<ProdutoDto> = produtoService.deletarProduto(idProduto).let {
+    fun deletarLogico(@PathVariable("id") idProduto : Long): HttpResponse<ProdutoDto> = produtoService.deletarLogico(idProduto).let {
         HttpResponse.ok()
     }
 

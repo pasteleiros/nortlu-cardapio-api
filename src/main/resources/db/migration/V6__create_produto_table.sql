@@ -5,6 +5,7 @@ CREATE TABLE produto (
 	nome varchar(255) NULL,
 	valor numeric(19,2) NULL,
 	id_categoria integer NULL,
+	ativo bool NULL,
 	CONSTRAINT pk_produto PRIMARY KEY (id),
 	CONSTRAINT fk_categoria FOREIGN KEY (id_categoria) REFERENCES categoria(id)
 );

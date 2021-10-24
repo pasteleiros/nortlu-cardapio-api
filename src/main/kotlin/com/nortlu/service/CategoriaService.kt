@@ -19,10 +19,17 @@ class CategoriaService (val categoriaRepo : CategoriaRepo, val redis : RedisServ
         return categorias
     }
 
-    fun criar(categoriaDto : CategoriaDto) : CategoriaDto = categoriaRepo.save(categoriaDto.toEntity()).toDto()
+    fun criar(categoriaDto: CategoriaDto): CategoriaDto = categoriaRepo.save(categoriaDto.toEntity()).toDto()
 
-    fun deletar(id: Long) = categoriaRepo.deleteById(id)
+    fun atualizar(categoriaDto: CategoriaDto): CategoriaDto {
+        if (categoriaDto.id != null) {
+            buscar(categoriaDto.id!!)
+            return categoriaRepo.update(categoriaDto.toEntity()).toDto()
+        }
 
-    fun buscar(id: Long) : CategoriaDto = categoriaRepo.findById(id)
-            .orElseThrow { NaoEncontradoException("Categoria não encontrada") }.toDto()
+        throw NaoEncontradoException("Categoria não encontrada")
+    }
+
+    fun buscar(id: Long): CategoriaDto = categoriaRepo.findById(id)
+        .orElseThrow { NaoEncontradoException("Categoria não encontrada") }.toDto()
 }

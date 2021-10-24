@@ -3,26 +3,23 @@ package com.nortlu.controller
 import com.nortlu.service.CategoriaService
 import io.github.pasteleiros.nortlulib.dto.CategoriaDto
 import io.micronaut.http.HttpResponse
-import io.micronaut.http.MediaType
 import io.micronaut.http.annotation.*
-import javax.inject.Inject
 
 @Controller("/categorias")
 class CategoriaController (val categoriaService : CategoriaService){
 //class CategoriaController (){
 
-    //@Inject
-    //lateinit var categoriaService : CategoriaService
-
     @Get("/listar")
-    fun listarCaregorias() : List<CategoriaDto> = categoriaService.listar()
+    fun listarCaregorias(): HttpResponse<List<CategoriaDto>> = HttpResponse.ok(categoriaService.listar())
 
     @Post
-    fun criarCategoria(@Body categoriaDto : CategoriaDto) : CategoriaDto = categoriaService.criar(categoriaDto)
+    fun criarCategoria(@Body categoriaDto: CategoriaDto): HttpResponse<CategoriaDto> =
+        HttpResponse.created(categoriaService.criar(categoriaDto))
 
-    @Delete("/{id}")
-    fun deletarCategoria(@PathVariable id: Long) = categoriaService.deletar(id)
+    @Put
+    fun deletarCategoria(@Body categoriaDto: CategoriaDto): HttpResponse<CategoriaDto> =
+        HttpResponse.ok(categoriaService.atualizar(categoriaDto))
 
     @Get("/{id}")
-    fun buscarPorId(@PathVariable id: Long) : HttpResponse<CategoriaDto> = HttpResponse.ok(categoriaService.buscar(id))
+    fun buscarPorId(@PathVariable id: Long): HttpResponse<CategoriaDto> = HttpResponse.ok(categoriaService.buscar(id))
 }

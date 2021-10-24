@@ -13,9 +13,8 @@ import io.micronaut.http.annotation.*
 class PedidoController (val pedidoService: PedidoService) {
 
     @Get("/listar")
-    fun listar(@QueryValue("status")  status : String): HttpResponse<Any> {
-        print(status)
-      return  HttpResponse.ok(pedidoService.listarPorStatus(StatusPedido.SOLICITADO))
+    fun listar(@QueryValue("status")  status : String): HttpResponse<List<PedidoDto>> {
+      return  HttpResponse.ok(pedidoService.listarPorStatus(StatusPedido.parse(status)))
     }
 
 
@@ -23,17 +22,12 @@ class PedidoController (val pedidoService: PedidoService) {
     fun salvar(@Body pedidoDto: PedidoDto):HttpResponse<PedidoDto> =
             HttpResponse.created(pedidoService.salvar(pedidoDto))
 
-    @Put
-    fun atualizar(@Body pedidoDto: PedidoDto):HttpResponse<PedidoDto> =
-        HttpResponse.created(pedidoService.atualizar(pedidoDto))
+    @Put("/cancelar")
+    fun cancelar(@Body pedidoDto: PedidoDto):HttpResponse<PedidoDto> =
+        HttpResponse.created(pedidoService.cancelar(pedidoDto))
 
     @Get("/{id}")
     fun buscar(@PathVariable("id") idPedido : Long): HttpResponse<PedidoDto> =
             HttpResponse.ok(pedidoService.buscar(idPedido))
-
-    @Delete("/{id}")
-    fun deletar(@PathVariable("id") idPedido : Long): HttpResponse<PedidoDto> = pedidoService.deletar(idPedido).let {
-        HttpResponse.ok()
-    }
 
 }

@@ -10,19 +10,14 @@ class UsuarioController(val usuarioService: UsuarioService) {
 
     @Post()
     fun salvarUsuario(@Body usuarioDto: UsuarioDto): HttpResponse<UsuarioDto> =
-            HttpResponse.created(usuarioService.salvarUsuario(usuarioDto))
+            HttpResponse.created(usuarioService.salvar(usuarioDto))
 
     @Get("/{id}")
     fun buscarUsuario(@PathVariable("id") idUsuario : Long ): HttpResponse<UsuarioDto> =
-            HttpResponse.ok(usuarioService.buscarUsuarioPorId(idUsuario))
+            HttpResponse.ok(usuarioService.buscarPorId(idUsuario))
 
-    @Delete("/{id}")
-    fun deletarUsuario(@PathVariable("id") idUsuario : Long ): HttpResponse<UsuarioDto> = usuarioService.deletarUsuarioPorId(idUsuario).let {
-        HttpResponse.ok()
-    }
-
-    @Put("/{id}")
-    fun atualizarUsuario(@PathVariable("id") idUsuario : Long, @Body usuarioDto: UsuarioDto): HttpResponse<UsuarioDto>
-        = HttpResponse.ok(usuarioService.atualizarUsuario(usuarioDto.apply { id = idUsuario }))
+    @Put
+    fun atualizarUsuario( @Body usuarioDto: UsuarioDto): HttpResponse<UsuarioDto>
+        = HttpResponse.ok(usuarioService.atualizarUsuario(usuarioDto))
 
 }
